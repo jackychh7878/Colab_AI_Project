@@ -19,7 +19,6 @@ Each notebook is self-contained and includes an **Open in Colab** badge pointing
 | [`Q&A_with_LM.ipynb`](Q&A_with_LM.ipynb) | **Extractive question answering** on **SQuAD-style** data: predict an answer **span** in the passage (or “unanswerable” behavior as supported by the pipeline). Uses a BERT-style reader via **SimpleTransformers** for fast training/eval. | **SimpleTransformers**; `bert-base-cased`; Stanford QA data (paths in notebook) |
 | [`Text_Summarization_Project.ipynb`](Text_Summarization_Project.ipynb) | **Abstractive summarization** with a **seq2seq transformer**: start from **Pegasus** (`google/pegasus-cnn_dailymail`), **fine-tune** on **dialogue → summary** data (**`Samsung/samsum`**), use **`TrainingArguments` + `Trainer`**, and measure quality with **ROUGE** via **`evaluate`**. | Transformers, Datasets, ROUGE |
 | [`Llama2_LoRA_Project.ipynb`](Llama2_LoRA_Project.ipynb) | **Instruction tuning** for **Llama 2 7B** with **LoRA** (**PEFT**), **quantization-friendly** tooling (**bitsandbytes** where applicable), and **TRL**-style supervised fine-tuning on an instruction dataset (`mlabonne/guanaco-llama2-1k`). Illustrates **efficient LLM adaptation** vs full fine-tuning. | PEFT, TRL, Accelerate, Transformers |
-| [`clear_format.ipynb`](clear_format.ipynb) | Small **utility**: strip **ipywidget** progress blobs so GitHub can render notebooks, and tidy outputs when syncing from Colab (same idea as `fix_notebooks_for_github.py`). | nbformat |
 
 ---
 
@@ -64,8 +63,6 @@ Colab_AI_Project/
 ├── Q&A_with_LM.ipynb
 ├── Text_Summarization_Project.ipynb
 ├── Llama2_LoRA_Project.ipynb
-├── clear_format.ipynb
-├── fix_notebooks_for_github.py
 └── README.md
 ```
 
