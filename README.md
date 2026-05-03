@@ -19,7 +19,7 @@ Each notebook is self-contained and includes an **Open in Colab** badge pointing
 | [`Q&A_with_LM.ipynb`](Q&A_with_LM.ipynb) | **Extractive question answering** on **SQuAD-style** data: predict an answer **span** in the passage (or “unanswerable” behavior as supported by the pipeline). Uses a BERT-style reader via **SimpleTransformers** for fast training/eval. | **SimpleTransformers**; `bert-base-cased`; Stanford QA data (paths in notebook) |
 | [`Text_Summarization_Project.ipynb`](Text_Summarization_Project.ipynb) | **Abstractive summarization** with a **seq2seq transformer**: start from **Pegasus** (`google/pegasus-cnn_dailymail`), **fine-tune** on **dialogue → summary** data (**`Samsung/samsum`**), use **`TrainingArguments` + `Trainer`**, and measure quality with **ROUGE** via **`evaluate`**. | Transformers, Datasets, ROUGE |
 | [`Llama2_LoRA_Project.ipynb`](Llama2_LoRA_Project.ipynb) | **Instruction tuning** for **Llama 2 7B** with **LoRA** (**PEFT**), **quantization-friendly** tooling (**bitsandbytes** where applicable), and **TRL**-style supervised fine-tuning on an instruction dataset (`mlabonne/guanaco-llama2-1k`). Illustrates **efficient LLM adaptation** vs full fine-tuning. | PEFT, TRL, Accelerate, Transformers |
-| [`clear_format.ipynb`](clear_format.ipynb) | Small **utility** used to normalize or strip noisy notebook output/metadata across the project notebooks (helpful when syncing from Colab to Git). | — |
+| [`clear_format.ipynb`](clear_format.ipynb) | Small **utility**: strip **ipywidget** progress blobs so GitHub can render notebooks, and tidy outputs when syncing from Colab (same idea as `fix_notebooks_for_github.py`). | nbformat |
 
 ---
 
@@ -48,7 +48,8 @@ These notebooks map cleanly to common hiring and portfolio keywords:
 
 1. **Recommended:** open any notebook on **Google Colab** via the badge at the top of the file (points to `jackychh7878/Colab_AI_Project` on GitHub).  
 2. **Locally:** use Python 3.10+ (as in the Colab logs), install dependencies per notebook (`pip install …` cells), and ensure **GPU** availability for larger models (BERT fine-tunes, Pegasus, Llama 2 + LoRA).  
-3. **Secrets:** notebooks that use the Hugging Face Hub may expect a token (`notebook_login` / `HF_TOKEN` patterns)—add your own token where prompted.
+3. **Secrets:** notebooks that use the Hugging Face Hub may expect a token (`notebook_login` / `HF_TOKEN` patterns)—add your own token where prompted.  
+4. **GitHub shows “Invalid Notebook”** (missing `application/vnd.jupyter.widget-state+json`): Colab/Hugging Face often save **tqdm** output as **ipywidgets**. GitHub’s viewer is strict about widget JSON. From the repo root run `python fix_notebooks_for_github.py` — it removes only the widget MIME bundle from each output and **keeps** `text/plain` (and images, etc.), so you do not need to re-run the notebook.
 
 ---
 
@@ -64,6 +65,7 @@ Colab_AI_Project/
 ├── Text_Summarization_Project.ipynb
 ├── Llama2_LoRA_Project.ipynb
 ├── clear_format.ipynb
+├── fix_notebooks_for_github.py
 └── README.md
 ```
 
